@@ -1,0 +1,265 @@
+<main>
+  <div class="container">
+    <section
+      class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
+    >
+      <div class="container">
+        <div class="row justify-content-center">
+          <div
+            class="col-lg-6 col-md-6 d-flex flex-column align-items-center justify-content-center"
+          >
+            <div class="d-flex justify-content-center py-4">
+              <a
+                href="index.html"
+                class="logo d-flex align-items-center w-auto"
+              >
+                <img src="assets/img/logo.png" alt="" />
+                <span class="d-none d-lg-block">NiceAdmin</span>
+              </a>
+            </div>
+            <!-- End Logo -->
+
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">
+                    Crea tu cuenta
+                  </h5>
+                  <p class="text-center small">
+                    Ingresa tus datos personales y crea una cuenta
+                  </p>
+                </div>
+
+                <!-- Multi Columns Form -->
+                <form
+                  #frmRegister="ngForm"
+                  (ngSubmit)="
+                    frmRegister.form.valid && verificarDatos(frmRegister)
+                  "
+                  class="row g-3"
+                >
+                  <!--Input de Nombres -->
+                  <div class="col-md-12">
+                    <label for="inputName" class="form-label">Nombres</label>
+                    <div
+                      class="text-danger error"
+                      *ngIf="frmRegister.submitted && usu.invalid"
+                    >
+                      <span *ngIf="usu.errors">Nombres requeridos</span>
+                    </div>
+                    <input
+                      [(ngModel)]="objusuarioSeleccionado.first_name"
+                      #usu="ngModel"
+                      type="text"
+                      name="usu"
+                      class="form-control"
+                      placeholder="Ingresa tus nombres"
+                      required
+                      [ngClass]="{
+                        'is-invalid': frmRegister.submitted && usu.invalid
+                      }"
+                    />
+                    <div class="invalid-feedback">
+                      Por favor ingresa tus nombres.
+                    </div>
+                  </div>
+
+                  <!--Input de Apellidos-------------------------------------------------------------------->
+                  <div class="col-md-12">
+                    <label for="inputlastName" class="form-label"
+                      >Apellidos</label
+                    >
+                    <span *ngIf="ape.errors">Apellidos requeridos</span>
+
+                    <input
+                      [(ngModel)]="objusuarioSeleccionado.last_name"
+                      #ape="ngModel"
+                      type="text"
+                      name="ape"
+                      class="form-control"
+                      placeholder="Ingresa tus apellidos"
+                      required
+                      [ngClass]="{
+                        'is-invalid': frmRegister.submitted && ape.invalid
+                      }"
+                    />
+                    <div class="invalid-feedback">
+                      Por favor ingresa tus apellidos.
+                    </div>
+                  </div>
+
+                  <!--Input de Correo------------------------------------------------------------------->
+                  <div class="col-12">
+                    <label for="yourEmail" class="form-label">Correo</label>
+
+                    <span *ngIf="ema.errors">Usuario requerido</span>
+                    <span *ngIf="ema.errors">Correo inválido</span>
+
+                    <div class="input-group has-validation">
+                      <input
+                        [(ngModel)]="objusuarioSeleccionado.email"
+                        #ema="ngModel"
+                        type="text"
+                        name="ema"
+                        class="form-control"
+                        required
+                        [ngClass]="{
+                          'is-invalid': frmRegister.submitted && ema.invalid
+                        }"
+                      />
+                      <div class="invalid-feedback">
+                        Por favor ingresa tu correo.
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--Input de contraseña------------------------------------------------------------->
+                  <div class="col-12">
+                    <label for="yourPassword" class="form-label"
+                      >Contraseña</label
+                    >
+
+                    <span *ngIf="cla.errors">Contraseña requerida</span>
+
+                    <input
+                      type="password"
+                      class="form-control rounded-3"
+                      name="cla"
+                      [(ngModel)]="objusuarioSeleccionado.password"
+                      #cla="ngModel"
+                      required
+                      [ngClass]="{
+                        'is-invalid': frmRegister && cla.invalid
+                      }"
+                    />
+                    <div class="invalid-feedback">
+                      Por favor ingresa una contraseña!
+                    </div>
+                  </div>
+                  <!--Input de confirmación de contraseña-------------------------------------->
+                  <div class="col-12">
+                    <label for="yourPassword2" class="form-label"
+                      >Confirmación de Contraseña</label
+                    >
+
+                    <span *ngIf="cla2.errors"
+                      >Confirmación de Contraseña requerida</span
+                    >
+
+                    <input
+                      type="password"
+                      class="form-control rounded-3"
+                      name="cla2"
+                      [(ngModel)]="objusuarioSeleccionado.password_confirm"
+                      #cla2="ngModel"
+                      required
+                      [ngClass]="{
+                        'is-invalid': frmRegister.submitted && cla2.invalid
+                      }"
+                    />
+                    <div class="invalid-feedback">
+                      Por favor ingresa nuevamente la contraseña!
+                    </div>
+                  </div>
+
+                  <!--Input de Usuario------------------------------------------------------->
+                  <div class="col-md-12">
+                    <label for="inputNickName" class="form-label"
+                      >Usuario</label
+                    >
+
+                    <span *ngIf="nickName.errors">Usuario requerido</span>
+                    <span *ngIf="nickName.errors"
+                      >El usuario debe tener minimo 5 caracteres</span
+                    >
+
+                    <input
+                      [(ngModel)]="objusuarioSeleccionado.username"
+                      #nickName="ngModel"
+                      type="text"
+                      class="form-control"
+                      placeholder="Ingresa un nombre de usuario"
+                      [ngClass]="{
+                        'is-invalid': frmRegister.submitted && nickName.invalid
+                      }"
+                    />
+                  </div>
+
+                  <!--Input fecha de nacimiento-->
+                  <div class="col-12">
+                    <label for="inputDate" class="form-label"
+                      >Fecha de Nacimiento</label
+                    >
+
+                    <span *ngIf="birth.errors">Fecha requerida</span>
+
+                    <input
+                      [(ngModel)]="objusuarioSeleccionado.birthday_date"
+                      #birth="ngModel"
+                      name="birth"
+                      type="date"
+                      class="form-control"
+                      required
+                      [ngClass]="{
+                        'is-invalid': frmRegister.submitted && birth.invalid
+                      }"
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="inputSchool" class="form-label">Colegio</label>
+                    <select id="inputSchool" class="form-select">
+                      <option selected>Seleccionar...</option>
+                      <option>Colegio de Boyaca</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="inputTeacher" class="form-label">Docente</label>
+                    <select id="inputTeacher" class="form-select">
+                      <option selected>Seleccionar...</option>
+                      <option>Jose</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        name="terms"
+                        type="checkbox"
+                        value=""
+                        id="acceptTerms"
+                        required
+                      />
+                      <label class="form-check-label" for="acceptTerms"
+                        >Estoy de acuerdo y acepto los
+                        <a href="#">terminos y condiciones</a></label
+                      >
+                      <div class="invalid-feedback">
+                        Debe estar de acuerdo antes de enviar.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary w-100" type="submit">
+                      Crear Cuenta
+                    </button>
+                  </div>
+                  <div class="col-12">
+                    <p class="small mb-0">
+                      ¿Ya tienes una cuenta?
+                      <a routerLink="/home/login" class="fw-bold"
+                        >Inicia sesión</a
+                      >
+                    </p>
+                  </div>
+                </form>
+                <!-- End Multi Columns Form -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<!-- End #main -->
