@@ -112,15 +112,14 @@
                       </div>
                     </div>
                   </div>
-
                   <!--Input de contraseña------------------------------------------------------------->
                   <div class="col-12">
-                    <label for="yourPassword" class="form-label"
-                      >Contraseña</label
+                    <label for="yourPassword2" class="form-label"
+                      >contraseña</label
                     >
-
-                    <span *ngIf="cla.errors">Contraseña requerida</span>
-
+                    <span *ngIf="cla.errors"
+                      >Confirmación de Contraseña requerida</span
+                    >
                     <input
                       type="password"
                       class="form-control rounded-3"
@@ -129,11 +128,11 @@
                       #cla="ngModel"
                       required
                       [ngClass]="{
-                        'is-invalid': frmRegister && cla.invalid
+                        'is-invalid': frmRegister.submitted && cla.invalid
                       }"
                     />
                     <div class="invalid-feedback">
-                      Por favor ingresa una contraseña!
+                      Por favor ingresa nuevamente la contraseña!
                     </div>
                   </div>
                   <!--Input de confirmación de contraseña-------------------------------------->
@@ -177,6 +176,7 @@
                       [(ngModel)]="objusuarioSeleccionado.username"
                       #nickName="ngModel"
                       type="text"
+                      name="nickName"
                       class="form-control"
                       placeholder="Ingresa un nombre de usuario"
                       [ngClass]="{
@@ -208,16 +208,32 @@
 
                   <div class="col-md-6">
                     <label for="inputSchool" class="form-label">Colegio</label>
-                    <select id="inputSchool" class="form-select">
+                    <select
+                      [(ngModel)]="objusuarioSeleccionado.school"
+                      #school="ngModel"
+                      name="school"
+                      class="form-control"
+                      required
+                      id="inputSchool"
+                      class="form-select"
+                    >
                       <option selected>Seleccionar...</option>
-                      <option>Colegio de Boyaca</option>
+                      <option value="2">Colegio de Boyaca</option>
                     </select>
                   </div>
                   <div class="col-md-4">
                     <label for="inputTeacher" class="form-label">Docente</label>
-                    <select id="inputTeacher" class="form-select">
+                    <select
+                      [(ngModel)]="objusuarioSeleccionado.teacher"
+                      #docente="ngModel"
+                      name="docente"
+                      class="form-control"
+                      required
+                      id="inputTeacher"
+                      class="form-select"
+                    >
                       <option selected>Seleccionar...</option>
-                      <option>Jose</option>
+                      <option value="3">Jose</option>
                     </select>
                   </div>
                   <div class="col-12">

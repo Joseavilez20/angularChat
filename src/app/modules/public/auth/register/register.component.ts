@@ -18,34 +18,34 @@ export class RegisterComponent implements OnInit {
   public tmp: any;
   public subscription: Subscription;
 
-  constructor(public singupService: RegisterService,public miMensaje: ToastrService, public router: Router) {
+  constructor(public singupService: RegisterService, public miMensaje: ToastrService, public router: Router) {
     this.objusuarioSeleccionado = this.inicializarUsuario();
     this.subscription = this.tmp;
-   }
+  }
 
-   public inicializarUsuario():SignupRequest{
-     return new SignupRequest('','','','','','','','','',false);
-   }
+  public inicializarUsuario(): SignupRequest {
+    return new SignupRequest('', '', '', '', '', '', '', '', '', false);
+  }
 
-   public verificarDatos(formulario: NgForm): void {
+  public verificarDatos(formulario: NgForm): void {
     const firstName = this.objusuarioSeleccionado.first_name;
     const lastName = this.objusuarioSeleccionado.last_name;
-    const userName = this.objusuarioSeleccionado.username;
-    const clave = this.objusuarioSeleccionado.password;
-    const clave2 = this.objusuarioSeleccionado.password_confirm;
     const birthdayDate = this.objusuarioSeleccionado.birthday_date;
-    const correo = this.objusuarioSeleccionado.email.toLowerCase().trim();
     const schoolName = this.objusuarioSeleccionado.school;
     const teacherName = this.objusuarioSeleccionado.teacher;
+    const userName = this.objusuarioSeleccionado.username;
+    const correo = this.objusuarioSeleccionado.email.toLowerCase().trim();
+    const clave = this.objusuarioSeleccionado.password;
+    const clave2 = this.objusuarioSeleccionado.password_confirm;
     const term = this.objusuarioSeleccionado.terms;
     // colocar todos los campos de registro como arriba(correo y clave)
-    const register = new SignupRequest(firstName,lastName,userName,clave,clave2,birthdayDate,correo,schoolName,teacherName,term);
+    const register = new SignupRequest(firstName, lastName, birthdayDate, schoolName, teacherName, userName, correo, clave, clave2, term);
     // crear constante nuevo usuario reemplazando loginRequest por modelo usuarioregistro 
 
     console.log(register, "********************************")
 
     this.subscription = this.singupService.myRegister(register).subscribe((res) => {
-      mostrarMensaje('success', 'Bienvenido'+ firstName, 'a BotComp', this.miMensaje);
+      mostrarMensaje('success', 'Bienvenido' + firstName, 'a BotComp', this.miMensaje);
       localStorage.setItem('token', res.token as any);
       this.router.navigate(['/admin/dashboard'])
     }, (err) => {
@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
     });
 
 
-   }
+  }
   ngOnInit(): void {
   }
 
